@@ -38,13 +38,13 @@ body {
 
 /* Layout */
 .app {
-  width: 1350px;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.main-content {
+.app-main-content {
   flex: 1;
   width: 100%;
   max-width: 1280px;
@@ -275,7 +275,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .add-word {
+  .app-main-content {
     padding: 1rem;
   }
 
