@@ -1,0 +1,165 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.dashboard-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f4f6f9;
+}
+
+.dashboard-main-content.sidebar-open {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+}
+
+.dashboard-content {
+  margin-top: 70px; /* Hauteur de la navbar */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-breadcrumb {
+  background: #f5f5f5;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.breadcrumb-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.breadcrumb-path {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumb-item {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-item:hover {
+  color: #111827;
+}
+
+.breadcrumb-item.active {
+  color: #111827;
+  font-weight: 500;
+}
+
+.breadcrumb-separator {
+  color: #9ca3af;
+  margin: 0 0.25rem;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2rem;
+  background: #f5f5f5;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-footer {
+  background: #ffffff;
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-main-content.sidebar-open {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .dashboard-main {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-main-content,
+  .dashboard-main-content.sidebar-open {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .dashboard-main {
+    padding: 1rem;
+  }
+  
+  .breadcrumb-content {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-main {
+    padding: 0.75rem;
+  }
+  
+  .dashboard-breadcrumb {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Optimisation des performances */
+.dashboard-main-content,
+.dashboard-breadcrumb,
+.dashboard-main,
+.dashboard-footer {
+  will-change: transform, margin-left, width;
+}
+
+/* Styles pour les scrollbars personnalisées */
+.dashboard-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dashboard-main::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dashboard-main::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.dashboard-main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} 
