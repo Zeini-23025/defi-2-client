@@ -1,67 +1,188 @@
 
+🏆 **Nom de l'équipe** : NOT FOUND
+
 # Hassaniya - Dictionnaire Collaboratif
 
-Ce projet est une application web pour la gestion collaborative du dictionnaire Hassaniya. Elle permet aux utilisateurs de proposer des mots, des définitions, et d'interagir via des commentaires.
+📌 **Objectif**
 
-## Prérequis
+L'application Hassaniya est une plateforme collaborative permettant aux utilisateurs de proposer, définir et commenter des mots du dialecte Hassaniya. Elle offre un système de validation communautaire et un suivi de l'historique des modifications.
 
-- **Git** pour cloner le projet.
-- **Docker** pour exécuter l'application dans un conteneur.
-- **Python 3.13+** (si vous choisissez d'exécuter le projet localement sans Docker).
-- **Docker Compose** (optionnel, si vous souhaitez utiliser Docker pour la gestion complète de l'environnement).
+📚 **Description du Projet**
+
+🚀 **Fonctionnalités**
+
+- **Gestion des utilisateurs** : Rôles (utilisateurs, modérateurs, administrateurs), authentification et gestion des profils.
+- **Soumission de mots** : Proposition de nouveaux mots avec définitions et sources.
+- **Validation communautaire** : Système d'approbation et de modifications collaboratives.
+- **Commentaires et interactions** : Possibilité de commenter et discuter les définitions.
+- **Historique des modifications** : Suivi des modifications et contributions.
+- **Notifications** : Alertes sur les nouvelles propositions, commentaires et validations.
+
+🐳 **Conteneurisation avec Docker**
+
+L'application est conteneurisée avec Docker, facilitant ainsi son déploiement et son exécution dans différents environnements.
+
+⚙️ **CI/CD avec GitHub Actions**
+
+Un pipeline CI/CD est mis en place avec GitHub Actions pour automatiser le processus de build et de push de l'image Docker vers Docker Hub.
+
+📂 **Livrables**
+
+- ✅ Code source du backend et frontend de l'application sur GitHub.
+- ✅ Dockerfile pour la conteneurisation.
+- ✅ Workflow GitHub Actions pour l'automatisation du build et du push Docker.
+- ✅ URL du dépôt Docker Hub contenant l'image Docker.
+
+🔹 **Dépôts GitHub**
+
+- 🔗 [Backend](https://github.com/Zeini-23025/defi-2-server) 
+- 🔗 [Frontend](https://github.com/Zeini-23025/defi-2-client)
+
+🐳 **Dépôts Docker Hub**
+
+- 🐳 [Backend](https://hub.docker.com/repository/docker/zeini/docker-server-dev)
+- 🐳 [Frontend](https://hub.docker.com/repository/docker/zeini/docker-client-dev)
+
+🚀 **Accéder à l'application**
+
+- 🔹 **Backend** : 🌍 [docker-server-hassaniya.onrender.com](#)
+- 🔹 **Frontend** : 🌍 [docker-client-hassaniya.onrender.com](#)
+
+---
 
 ## Installation du projet
 
 ### 1. Cloner le projet avec Git
 
-Si vous ne l'avez pas encore, commencez par cloner le projet avec Git :
+```bash
+git clone https://github.com/Zeini-23025/defi-2-client.git
+cd defi-2-server
+```
+
+
+### 2. Exécuter le Frontend
+
+#### Méthode 1 : Utilisation de Docker
+
+Télécharger l'image Docker :
+
+```bash
+docker pull zeini/docker-client-dev
+```
+
+Exécuter le frontend avec Docker :
+
+```bash
+docker run -p 3000:3000 zeini/docker-client-dev
+```
+
+#### Méthode 2 : Exécution locale avec Git & Node.js
+
+Cloner le projet Frontend :
 
 ```bash
 git clone https://github.com/Zeini-23025/defi-2-client.git
 cd defi-2-client
 ```
 
-### Résumé des étapes :
+Installer les dépendances :
 
-#### 1. **Avec Docker** :
+```bash
+npm install
+```
 
-- **Télécharger l'image Docker** :
-  ```bash
-  docker pull zeini/docker-client-dev
-  ```
+Démarrer le frontend :
 
-- **Exécuter l'application avec Docker** :
-  ```bash
-  docker run -p 3000:3000 zeini/docker-client-dev
-  ```
+```bash
+npm start
+```
 
-#### 2. **Exécuter le projet localement avec Git & Python** :
+L'application sera accessible à l'adresse [http://localhost:3000](http://localhost:3000).
 
-Si vous souhaitez exécuter le projet localement sans Docker, suivez ces étapes :
+---
 
-- **Cloner le projet depuis GitHub** :
-  ```bash
-  git clone https://github.com/Zeini-23025/defi-2-client.git
-  cd defi-2-client
-  ```
+### 3. Exécuter le Backend
 
-- **Installer les dépendances** :
-  ```bash
-  npm install
-  ```
+#### Méthode 1 : Utilisation de Docker
 
-- **Run** :
-  ```bash
-  npm run dev
-  ```
+Télécharger l'image Docker :
+
+```bash
+docker pull zeini/docker-server-dev
+```
+
+Exécuter l'application avec Docker :
+
+```bash
+docker run -p 8000:8000 zeini/docker-server-dev
+```
+
+#### Méthode 2 : Exécution locale avec Git & Python
+
+Installer les dépendances Python :
+
+```bash
+pip install -r requirements.txt
+```
+
+Appliquer les migrations de la base de données :
+
+```bash
+python manage.py migrate
+```
+
+Démarrer le serveur de développement Django :
+
+```bash
+python manage.py runserver
+```
+
+L'application sera accessible à l'adresse [http://localhost:8000](http://localhost:8000).
+
+---
 
 
+### 4. Exécuter l'ensemble du projet (Backend + Frontend)
 
-L'application sera accessible à l'adresse `http://localhost:3000`. 
+#### Méthode 1 : Utilisation de Docker
 
-## Liens utiles
+Tirer les images Docker :
 
-- **Dépôt GitHub** : [https://github.com/Zeini-23025/defi-2-client.git](https://github.com/Zeini-23025/defi-2-client.git)
-- **Image Docker** : [https://hub.docker.com/r/zeini/docker-client-dev](https://hub.docker.com/r/zeini/docker-client-dev)
+```bash
+docker pull zeini/docker-server-dev
+docker pull zeini/docker-client-dev
+```
 
-Ce fichier `README.md` est maintenant prêt et contient toutes les instructions nécessaires pour cloner et exécuter votre projet, à la fois localement et via Docker.
+Exécuter les conteneurs Backend et Frontend :
+
+```bash
+docker run -d -p 8000:8000 --name backend zeini/docker-server-dev
+docker run -d -p 3000:3000 --name frontend --link backend zeini/docker-client-dev
+```
+
+#### Méthode 2 : Exécution locale
+
+Lancer le Backend :
+
+```bash
+cd defi-2-server
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+Lancer le Frontend :
+
+```bash
+cd ../defi-2-client
+npm install
+npm start
+```
+
+L'application complète sera accessible aux adresses suivantes :
+
+- Backend : [http://localhost:8000](http://localhost:8000)
+- Frontend : [http://localhost:3000](http://localhost:3000)
+
+---
+
