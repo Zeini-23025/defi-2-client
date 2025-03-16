@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { apiServices } from '../api'
 
 function AddWord() {
+  const location = useLocation()
   const [wordData, setWordData] = useState({
     word: '',
     phonetic: '',
@@ -10,11 +13,70 @@ function AddWord() {
     dialect: '',
     source: ''
   })
+  const [wordVariants, setWordVariants] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [selectedVariant, setSelectedVariant] = useState(null)
+  const [responseData, setResponseData] = useState(null)
+
+  useEffect(() => {
+    // Check if word is provided in URL query params
+    const params = new URLSearchParams(location.search)
+    const wordParam = params.get('word')
+
+    if (wordParam) {
+      setWordData(prev => ({
+        ...prev,
+        word: wordParam
+      }))
+
+      // Fetch word variants
+      fetchWordVariants(wordParam)
+    }
+  }, [location.search])
+
+  const fetchWordVariants = async (word) => {
+    if (!word || word.trim().length < 2) return
+
+    setLoading(true)
+    try {
+      const response = await apiServices.MotsGenerer(word.trim())
+      console.log('API Response in AddWord:', response)
+      setResponseData(response.data)
+
+      // Process the response data
+      if (response.data) {
+        if (Array.isArray(response.data)) {
+          setWordVariants(response.data)
+        } else if (response.data.variants) {
+          // Handle the case where the response contains a 'variants' field
+          const variantsText = response.data.variants
+          const variantsList = variantsText.split('\n').filter(v => v.trim())
+          const formattedVariants = variantsList.map(variant => ({
+            form: variant.trim(),
+            word: variant.trim(),
+            type: 'variante',
+            description: `Forme dérivée de '${response.data.word || word}'`
+          }))
+          setWordVariants(formattedVariants)
+        } else {
+          setWordVariants([])
+        }
+      } else {
+        setWordVariants([])
+      }
+    } catch (error) {
+      console.error('Error fetching word variants:', error)
+      setWordVariants([])
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     // TODO: Implement API call to save the word
     console.log('Submitting word:', wordData)
+    alert('Mot ajouté avec succès! (Simulation)')
   }
 
   const handleChange = (e) => {
@@ -23,11 +85,74 @@ function AddWord() {
       ...prev,
       [name]: value
     }))
+
+    // If word field changes, fetch variants
+    if (name === 'word' && value.trim().length > 1) {
+      fetchWordVariants(value)
+    }
+  }
+
+  const applyVariant = (variant) => {
+    setSelectedVariant(variant)
+
+    // Update form with variant data
+    setWordData(prev => ({
+      ...prev,
+      word: variant.word || variant.form || prev.word,
+      category: variant.type ? mapVariantTypeToCategory(variant.type) : prev.category,
+      // You can add more fields here as needed
+    }))
+  }
+
+  // Helper function to map variant types to form categories
+  const mapVariantTypeToCategory = (type) => {
+    const typeMap = {
+      'conjugaison': 'verbe',
+      'pluriel': 'nom',
+      'féminin': 'adjectif',
+      'diminutif': 'nom',
+      'variante': 'nom',
+      // Add more mappings as needed
+    }
+
+    return typeMap[type.toLowerCase()] || ''
   }
 
   return (
     <div className="add-word">
       <h2>Ajouter un nouveau mot</h2>
+
+      {/* Display raw response data for debugging */}
+      {responseData && (
+        <div className="response-data-debug">
+          <h3>Données brutes de l'API:</h3>
+          <pre>{JSON.stringify(responseData, null, 2)}</pre>
+        </div>
+      )}
+
+      {wordVariants.length > 0 && (
+        <div className="word-variants-section">
+          <h3>Formes grammaticales suggérées</h3>
+          <p className="variants-help">Sélectionnez une forme pour pré-remplir le formulaire</p>
+
+          <div className="variants-container">
+            {wordVariants.map((variant, index) => (
+              <div
+                key={index}
+                className={`variant-item ${selectedVariant === variant ? 'selected' : ''}`}
+                onClick={() => applyVariant(variant)}
+              >
+                <span className="variant-word">{variant.word || variant.form}</span>
+                {variant.type && <span className="variant-type">{variant.type}</span>}
+                {variant.description && <span className="variant-description">{variant.description}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {loading && <div className="variants-loading">Chargement des variantes...</div>}
+
       <form onSubmit={handleSubmit} className="word-form">
         <div className="form-group">
           <label htmlFor="word">Mot (en Hassaniya)</label>

@@ -86,6 +86,10 @@ const apiServices = {
       new_password: newPassword,
     });
   },
+
+  MotsGenerer: async (word) => {
+    return await api.get(`/generate-word-variants/${encodeURIComponent(word)}`);
+  },
 };
 
 export { api as default, apiServices };

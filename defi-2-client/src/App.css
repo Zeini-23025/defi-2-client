@@ -769,3 +769,233 @@ button {
     padding: 0 1rem;
   }
 }
+
+/* Word Suggestions Styles */
+.search-form-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-input-container {
+  position: relative;
+  flex: 1;
+}
+
+.suggestions-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+}
+
+.suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestion-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.2s ease;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.suggestion-word {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.suggestion-type {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background-color: var(--background-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+}
+
+.suggestion-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-left: 0.5rem;
+  flex: 1;
+}
+
+.suggestion-loading {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.no-suggestions {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add-suggestion-button,
+.add-new-word-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-suggestion-button:hover,
+.add-new-word-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Word Variants Styles for AddWord */
+.word-variants-section {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.word-variants-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.variants-help {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.variants-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.variant-item {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.variant-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.variant-item.selected {
+  border-color: var(--secondary-color);
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.variant-word {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.variant-type {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background-color: var(--card-background);
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.variant-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.variants-loading {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Responsive adjustments for suggestions */
+@media (max-width: 768px) {
+  .search-form-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-button {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .variant-item {
+    width: 100%;
+  }
+}
+
+/* Response Data Debug Styles */
+.response-data-debug {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  overflow: auto;
+}
+
+.response-data-debug h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+}
+
+.response-data-debug pre {
+  margin: 0;
+  padding: 0.75rem;
+  background-color: #212529;
+  color: #f8f9fa;
+  border-radius: 0.25rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
