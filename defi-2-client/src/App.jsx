@@ -7,26 +7,35 @@ import Dictionary from './components/Dictionary'
 import ImportDocument from './components/ImportDocument'
 import DashboardLayout from './admin/Dashboard/layouts/DashboardLayout'
 import Dashboard from './admin/Dashboard/pages/Dashboard'
+import Footer from './components/Footer'
+import { ThemeProvider } from './components/ThemeContext'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import Profile from './components/profile/Profile'
+import Notifications from './components/notifications/Notifications'
 import './App.css'
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Routes principales de l'application */}
-        <Route path="/" element={
-          <div className="app">
-            <Navbar />
-            <main className="app-main-content">
-              <Routes>
-                <Route index element={<Home />} />
-                <Route path="add" element={<AddWord />} />
-                <Route path="dictionary" element={<Dictionary />} />
-                <Route path="import" element={<ImportDocument />} />
-              </Routes>
-            </main>
-          </div>
-        } />
+    <ThemeProvider>
+      <Router>
+        <div className="app">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/add" element={<AddWord />} />
+              <Route path="/dictionary" element={<Dictionary />} />
+              <Route path="/import" element={<ImportDocument />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/notifications" element={<Notifications />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+
 
         {/* Routes du dashboard admin */}
         <Route path="/admin/*" element={<DashboardLayout />}>
@@ -34,8 +43,8 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           {/* Ajoutez d'autres routes admin ici */}
         </Route>
-      </Routes>
-    </Router>
+      </Router>
+    </ThemeProvider>
   )
 }
 
