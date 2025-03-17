@@ -2,7 +2,7 @@ import axios from "axios";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://docker-server-prod.onrender.com/:8000/api",
   headers: { "Content-Type": "application/json" },
 });
 
