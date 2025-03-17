@@ -1,4 +1,3 @@
-
 🏆 **Nom de l'équipe** : NOT FOUND
 
 # Hassaniya - Dictionnaire Collaboratif
@@ -26,7 +25,7 @@ L'application est conteneurisée avec Docker, facilitant ainsi son déploiement 
 
 Un pipeline CI/CD est mis en place avec GitHub Actions pour automatiser le processus de build et de push de l'image Docker vers Docker Hub.
 
-📂 **Livrables**
+👤 **Livrables**
 
 - ✅ Code source du backend et frontend de l'application sur GitHub.
 - ✅ Dockerfile pour la conteneurisation.
@@ -35,7 +34,7 @@ Un pipeline CI/CD est mis en place avec GitHub Actions pour automatiser le proce
 
 🔹 **Dépôts GitHub**
 
-- 🔗 [Backend](https://github.com/Zeini-23025/defi-2-server) 
+- 🔗 [Backend](https://github.com/Zeini-23025/defi-2-server)
 - 🔗 [Frontend](https://github.com/Zeini-23025/defi-2-client)
 
 🐳 **Dépôts Docker Hub**
@@ -45,22 +44,67 @@ Un pipeline CI/CD est mis en place avec GitHub Actions pour automatiser le proce
 
 🚀 **Accéder à l'application**
 
-- 🔹 **Backend** : 🌍 [docker-server-hassaniya.onrender.com](#)
-- 🔹 **Frontend** : 🌍 [docker-client-hassaniya.onrender.com](#)
+- 🔹 **Backend** : 🌍 [docker-server-hassaniya.onrender.com](https://docker-server-prod.onrender.com)
+- 🔹 **Frontend** : 🌍 [docker-client-hassaniya.onrender.com](https://docker-client-prod.onrender.com)
 
----
 
 ## Installation du projet
 
 ### 1. Cloner le projet avec Git
 
 ```bash
-git clone https://github.com/Zeini-23025/defi-2-client.git
+git clone https://github.com/Zeini-23025/defi-2-server.git
 cd defi-2-server
 ```
 
+### 2. Exécuter le Backend
 
-### 2. Exécuter le Frontend
+#### Méthode 1 : Utilisation de Docker
+
+Télécharger l'image Docker :
+
+```bash
+docker pull zeini/docker-server-dev
+```
+
+Exécuter l'application avec Docker :
+
+```bash
+docker run -p 8000:8000 zeini/docker-server-dev
+```
+
+#### Méthode 2 : Exécution locale avec Git & Python
+Cloner le projet avec Git
+
+```bash
+git clone https://github.com/Zeini-23025/defi-2-server.git
+cd defi-2-server
+```
+
+Installer les dépendances Python :
+
+```bash
+pip install -r requirements.txt
+cd app
+```
+
+Appliquer les migrations de la base de données :
+
+```bash
+python manage.py migrate
+```
+
+Démarrer le serveur de développement Django :
+
+```bash
+python manage.py runserver
+```
+
+L'application sera accessible à l'adresse [http://localhost:8000](http://localhost:8000).
+
+---
+
+### 3. Exécuter le Frontend
 
 #### Méthode 1 : Utilisation de Docker
 
@@ -88,59 +132,19 @@ cd defi-2-client
 Installer les dépendances :
 
 ```bash
+cd defi-2-client
 npm install
 ```
 
 Démarrer le frontend :
 
 ```bash
-npm start
+npm run dev
 ```
 
-L'application sera accessible à l'adresse [http://localhost:3000](http://localhost:3000).
+L'application sera accessible à l'adresse [http://localhost:5173](http://localhost:5173).
 
 ---
-
-### 3. Exécuter le Backend
-
-#### Méthode 1 : Utilisation de Docker
-
-Télécharger l'image Docker :
-
-```bash
-docker pull zeini/docker-server-dev
-```
-
-Exécuter l'application avec Docker :
-
-```bash
-docker run -p 8000:8000 zeini/docker-server-dev
-```
-
-#### Méthode 2 : Exécution locale avec Git & Python
-
-Installer les dépendances Python :
-
-```bash
-pip install -r requirements.txt
-```
-
-Appliquer les migrations de la base de données :
-
-```bash
-python manage.py migrate
-```
-
-Démarrer le serveur de développement Django :
-
-```bash
-python manage.py runserver
-```
-
-L'application sera accessible à l'adresse [http://localhost:8000](http://localhost:8000).
-
----
-
 
 ### 4. Exécuter l'ensemble du projet (Backend + Frontend)
 
@@ -165,8 +169,10 @@ docker run -d -p 3000:3000 --name frontend --link backend zeini/docker-client-de
 Lancer le Backend :
 
 ```bash
+git clone https://github.com/Zeini-23025/defi-2-server.git
 cd defi-2-server
 pip install -r requirements.txt
+cd app
 python manage.py migrate
 python manage.py runserver
 ```
@@ -174,15 +180,13 @@ python manage.py runserver
 Lancer le Frontend :
 
 ```bash
-cd ../defi-2-client
+git clone https://github.com/Zeini-23025/defi-2-client.git
+cd defi-2-client/defi-2-client
 npm install
-npm start
+npm run dev
 ```
 
 L'application complète sera accessible aux adresses suivantes :
 
 - Backend : [http://localhost:8000](http://localhost:8000)
-- Frontend : [http://localhost:3000](http://localhost:3000)
-
----
-
+- Frontend : [http://localhost:5173](http://localhost:5173)
